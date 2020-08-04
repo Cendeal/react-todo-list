@@ -6,23 +6,38 @@ import {ADD_TODO, DELETE_TODO, MARK_CANCEL, MARK_DONE, SHOW_DONE_TODO_LIST} from
     status:todoStatus.DOING
 }
  */
+let counter = 0;
 const todoList = (state = [], action) => {
     switch (action.type) {
-        case MARK_DONE:
-            state[action.id].status = todoStatus.DONE
+        case MARK_DONE: {
+            let data = state.find(todo => todo.id === action.id);
+            if (data) {
+                data.status = todoStatus.DONE
+            }
             return [...state]
-        case MARK_CANCEL:
-            state[action.id].status = todoStatus.DOING
+        }
+
+        case MARK_CANCEL: {
+            let data = state.find(todo => todo.id === action.id);
+            if (data) {
+                data.status = todoStatus.DOING
+            }
             return [...state]
+        }
         case ADD_TODO:
-            return [...state, {text: action.text, status: todoStatus.DOING}]
+            return [...state,
+                {
+                    id: counter++,
+                    text: action.text,
+                    status: todoStatus.DOING,
+                    time: new Date()
+                }];
         case DELETE_TODO:
-            state.splice(action.id, 1)
-            return [...state]
+            return [...state.filter(todo => todo.id !== action.id)];
         case SHOW_DONE_TODO_LIST:
-            return [state.filter(todo => todo.status === todoStatus.DONE)]
+            return [...state.filter(todo => todo.status === todoStatus.DONE)];
         default:
             return state
     }
-}
+};
 export default todoList

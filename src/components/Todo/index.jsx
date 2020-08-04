@@ -2,24 +2,40 @@ import React from "react";
 import PropTypes from 'prop-types';
 import todoStatus from "../../constants/todoStatus";
 import './index.css'
+
 class Todo extends React.Component {
     handleDelete = (e) => {
-        e.stopPropagation()
-        this.props.deleteTodo(this.props.id)
-    }
+        e.stopPropagation();
+        this.props.deleteTodo(this.props.todo.id)
+    };
 
-    handleMark = (e) => {
+    handleMark = () => {
         if (this.props.status === todoStatus.DOING) {
-            this.props.markDone(this.props.id)
+            this.props.markDone(this.props.todo.id)
         } else {
-            this.props.markCancel(this.props.id)
+            this.props.markCancel(this.props.todo.id)
         }
-    }
+    };
+    addClassNames = () => {
+        const classNames = ['todo'];
+        if (this.props.status === todoStatus.DONE) {
+            classNames.push('is-done')
+        }
+        return classNames.join(' ')
+    };
+    formatDate = (date) => {
+        if (date instanceof Date) {
+            return `[${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}]`
+        }
+        return ''
+    };
 
     render() {
-        return <div className={`todo${this.props.status === todoStatus.DOING ? '' : ' is-done'}`}
-                    onClick={this.handleMark}>
-            <span>{this.props.text}</span>
+        return <div className={this.addClassNames()} onClick={this.handleMark}>
+            <div className={'text'} title={this.props.todo.text}>{this.props.todo.text}</div>
+            <div className={'time'}>
+                <span>{this.formatDate(this.props.todo.time)}</span>
+            </div>
             <span className={'delete'} onClick={this.handleDelete}>x</span>
         </div>
     }
@@ -28,5 +44,5 @@ class Todo extends React.Component {
 Todo.propsTypes = {
     text: PropTypes.string.isRequired,
     deleteTodo: PropTypes.func.isRequired
-}
+};
 export default Todo

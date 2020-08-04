@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from 'prop-types'
 import TodoContainer from "../../containers/TodoContainer";
-
+import './index.css'
 class TodoList extends React.Component {
     render() {
         return (<div className={"todo-list"}>
             {this.props.todoList.map(
-                (todo, index) => <TodoContainer key={index} id={index} status={todo.status} text={todo.text}/>
+                (todo) => <TodoContainer key={todo.id} todo={todo} status={todo.status}/>
             )}
         </div>)
     }
@@ -14,5 +14,5 @@ class TodoList extends React.Component {
 
 TodoList.propTypes = {
     todoList: PropTypes.array.isRequired
-}
+};
 export default TodoList;

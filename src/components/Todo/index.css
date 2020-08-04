@@ -3,19 +3,36 @@
 }
 .delete{
     position: absolute;
-    top:-12px;
+    top: -12px;
     right: -8px;
     background: transparent;
     color: white;
     cursor: pointer;
-    font-size: 1rem;
-    font-weight: bold;
+    font-size: 0.88rem;
 }
-.todo{
+.todo {
     color: #20232a;
-    padding: 0.2rem 0.5rem;
+    padding: 0.4rem;
     background: #ffe564;
     border-radius: 0.25rem;
     position: relative;
-    margin: 0.4rem;
+    margin: 0.8rem;
+    cursor: pointer;
+    width: 10rem;
+    height: 10rem;
+    text-align: left;
+    text-overflow: ellipsis;
+    word-break: break-word;
+}
+
+.todo:hover {
+    transform: translateY(-0.2rem);
+    transition: all .3s ease 0ms;;
+}
+
+.text {
+    margin-bottom: 0.8rem;
+    max-height: 8rem;
+    max-width: 9rem;
+    overflow: hidden;
 }

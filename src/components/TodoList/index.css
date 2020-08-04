@@ -1,0 +1,13 @@
+.todo-list {
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.time {
+    font-size: 0.8rem;
+    position: absolute;
+    bottom: 0.5rem;
+}
