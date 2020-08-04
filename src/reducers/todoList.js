@@ -1,5 +1,5 @@
 import todoStatus from "../constants/todoStatus";
-import {ADD_TODO, DELETE_TODO, MARK_CANCEL, MARK_DONE, SHOW_DONE_TODO_LIST} from "../constants/actionTypes";
+import {ADD_TODO, DELETE_TODO, MARK_CANCEL, MARK_DONE} from "../constants/actionTypes";
 /*
 {
     text:"example todo",
@@ -34,8 +34,6 @@ const todoList = (state = [], action) => {
                 }];
         case DELETE_TODO:
             return [...state.filter(todo => todo.id !== action.id)];
-        case SHOW_DONE_TODO_LIST:
-            return [...state.filter(todo => todo.status === todoStatus.DONE)];
         default:
             return state
     }
