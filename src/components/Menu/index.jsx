@@ -6,10 +6,10 @@ class Menu extends React.Component {
     render() {
         return <ul className={'menu'}>
             <li>
-                <Link to="/">index</Link>
+                <Link to="/">show all todo list</Link>
             </li>
             <li>
-                <Link to="/done">Users</Link>
+                <Link to="/done">show done todo list</Link>
             </li>
         </ul>
     }
