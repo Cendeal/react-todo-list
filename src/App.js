@@ -1,18 +1,31 @@
 import React from 'react';
 import './App.css';
-import TodoFormContainer from "./containers/TodoFormContainer";
-import TodoListContainer from "./containers/TodoListContainer";
+import TodoListPage from "./components/TodoListPage";
+import {HashRouter as Router, Route, Switch, Link} from "react-router-dom";
+import DoneTodoListContainer from "./containers/DoneTodoListContainer";
+import Menu from "./components/Menu";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-          <h2>Todo List</h2>
-        <TodoListContainer/>
-        <TodoFormContainer/>
-      </header>
-    </div>
-  );
+    return (
+        <div className="App">
+            <Router>
+                <header className="App-header">
+                    <Menu/>
+                    <h2>Todo List</h2>
+
+                    <Switch>
+                        <Route exact path="/">
+                            <TodoListPage/>
+                        </Route>
+                        <Route exact path="/done">
+                            <DoneTodoListContainer/>
+                        </Route>
+                    </Switch>
+
+                </header>
+            </Router>
+        </div>
+    );
 }
 
 export default App;
