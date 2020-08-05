@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import TodoListPage from "./components/TodoListPage";
-import { Route, Switch} from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 import DoneTodoListContainer from "./containers/DoneTodoListContainer";
 import Menu from "./components/Menu";
 import {store} from "./index";
@@ -19,13 +19,13 @@ class App extends React.Component {
             <div className="App">
                 <header className="App-header">
                     <Menu/>
-                    <h2 className={'title'}>Todo List</h2>
-
                     <Switch>
                         <Route exact path="/">
+                            <h2 className={'title'}>All Todo List</h2>
                             <TodoListPage/>
                         </Route>
                         <Route exact path="/done">
+                            <h2 className={'title'}>Done Todo List</h2>
                             <DoneTodoListContainer/>
                         </Route>
                     </Switch>
