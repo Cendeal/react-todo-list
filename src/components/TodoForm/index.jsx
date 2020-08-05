@@ -10,7 +10,8 @@ class TodoForm extends React.Component {
         super(props);
         this.state = {
             text: "",
-            visible: false
+            visible: false,
+            radio: 'NORMAL'
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -18,7 +19,7 @@ class TodoForm extends React.Component {
     }
 
     async handleSubmit() {
-        if (this.state.text.length === 0) {
+        if (this.state.text.length === 0 || !this.state.radio) {
             return
         }
         await this.props.addTodo({text: this.state.text, type: this.state.radio})
