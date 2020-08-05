@@ -7,25 +7,24 @@ import {
     CHANGE_TYPE
 } from "../constants/actionTypes";
 
-export const addTodo = (todo) => (
-    {
-        type: ADD_TODO,
-        todo
-    }
-);
+export const addTodo = (todo) => ({
+    type: ADD_TODO,
+    todo
+});
+
 export const deleteTodo = (id) => ({
     type: DELETE_TODO,
     id
 });
 
-export const markDone = (id) => ({
+export const markDone = (data) => ({
     type: MARK_DONE,
-    id
+    data
 });
 
-export const markCancel = (id) => ({
+export const markCancel = (data) => ({
     type: MARK_CANCEL,
-    id
+    data
 });
 
 

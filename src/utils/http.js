@@ -17,7 +17,8 @@ request.interceptors.response.use(function (response) {
     return response.data;
 }, async function (error) {
     if (error.config.method.toUpperCase() !== 'GET') {
-        message.error(error.response ? error.response.data : 'unknown error');
+        console.log(JSON.stringify(error));
+        message.error(error.response ? error.response.data : error.message || 'UNKNOWN ERROR, RETRY IT LATER.');
         const data = await getTodoList();
         store.dispatch(updateTodoList(data))
     }

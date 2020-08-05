@@ -22,15 +22,15 @@ class Todo extends React.Component {
         this.setState({
             spinning: flag
         })
-    }
+    };
     handleDelete = async (e) => {
         e.stopPropagation();
-        this.handleLoading(true)
+        this.handleLoading(true);
         await this.props.deleteTodo(this.props.todo.id)
     };
 
     handleMark = async () => {
-        this.handleLoading(true)
+        this.handleLoading(true);
         if (this.props.status === todoStatus.DOING) {
             await this.props.markDone(this.props.todo.id)
         } else {
@@ -47,16 +47,15 @@ class Todo extends React.Component {
         return classNames.join(' ')
     };
     formatDate = (date) => {
-        date = new Date(date)
+        date = new Date(date);
         if (date instanceof Date) {
             return `${date.getFullYear()}-${prefixZero(date.getMonth() + 1, 2)}-${prefixZero(date.getDate(), 2)} ${prefixZero(date.getHours(), 2)}:${prefixZero(date.getMinutes(), 2)}`
         }
         return ''
     };
     handleSelect = async (value) => {
-        console.log(value)
         await this.props.updateType(this.props.todo.id, value)
-    }
+    };
 
     render() {
         return (
@@ -90,15 +89,14 @@ class Todo extends React.Component {
                       }>
                     <div className={this.addClassNames()} onClick={this.handleMark}>
                         <div className={'text'} title={this.props.todo.text}>{this.props.todo.text}</div>
-                        {/*<div className={'time'}>*/}
-                        {/*<span style={{*/}
-                        {/*    display: this.props.todo.created ? 'block' : 'none'*/}
-                        {/*}}>[C]:{this.formatDate(this.props.todo.created)}</span>*/}
-                        {/*    <span style={{*/}
-                        {/*        display: this.props.todo.updated ? 'block' : 'none'*/}
-                        {/*    }}>[U]:{this.formatDate(this.props.todo.updated)}</span>*/}
-                        {/*</div>*/}
-                        {/*<span className={'delete'} onClick={this.handleDelete}>X</span>*/}
+                        <div className={'time'}>
+                        <span style={{
+                            display: this.props.todo.created ? 'block' : 'none'
+                        }}>[C]:{this.formatDate(this.props.todo.created)}</span>
+                            <span style={{
+                                display: this.props.todo.updated ? 'block' : 'none'
+                            }}>[U]:{this.formatDate(this.props.todo.updated)}</span>
+                        </div>
                     </div>
                 </Card>
             </Spin>

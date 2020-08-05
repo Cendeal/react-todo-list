@@ -6,9 +6,3 @@
     position: relative;
     justify-content: center;
 }
-
-.time {
-    font-size: 0.8rem;
-    position: absolute;
-    bottom: 0.5rem;
-}

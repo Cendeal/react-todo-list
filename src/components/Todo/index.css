@@ -7,3 +7,9 @@
     text-overflow: ellipsis;
     word-break: break-word;
 }
+
+.todo .time {
+    font-size: 0.8rem;
+    margin: 25px 0 -15px 0;
+    color: rgba(0, 0, 0, .45);
+}

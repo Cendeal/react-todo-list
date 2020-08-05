@@ -8,7 +8,9 @@ class TodoList extends React.Component {
     render() {
         return (<div className={"todo-list"}>
             {this.props.todoList.length === 0 ?
-                <Empty/> :
+                <Empty style={{
+                    color: "white"
+                }}/> :
                 this.props.todoList.map(
                     (todo) => <TodoContainer key={todo.id} todo={todo} status={todo.status}/>
                 )

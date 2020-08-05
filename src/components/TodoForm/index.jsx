@@ -1,5 +1,5 @@
 import React from "react";
-import {Input, Button, Modal, Radio} from "antd";
+import {Input, Button, Modal, Radio, Spin} from "antd";
 
 import {
     PlusOutlined
@@ -11,10 +11,11 @@ class TodoForm extends React.Component {
         this.state = {
             text: "",
             visible: false,
-            radio: 'NORMAL'
-        }
+            radio: 'NORMAL',
+            spinning: false
+        };
 
-        this.handleChange = this.handleChange.bind(this)
+        this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
@@ -22,11 +23,14 @@ class TodoForm extends React.Component {
         if (this.state.text.length === 0 || !this.state.radio) {
             return
         }
-        await this.props.addTodo({text: this.state.text, type: this.state.radio})
+        this.setState({
+            spinning: true
+        });
+        await this.props.addTodo({text: this.state.text, type: this.state.radio});
         this.setState({
             text: '',
             visible: false,
-            radio: 'NORMAL'
+            spinning: false
         })
     }
 
@@ -40,22 +44,22 @@ class TodoForm extends React.Component {
         this.setState({
             visible: false
         })
-    }
+    };
 
     onChangeRadio = (e) => {
         this.setState({
             radio: e.target.value
         })
-    }
+    };
 
     handleShow = () => {
         this.setState({
             visible: true
         })
-    }
+    };
 
     render() {
-        const options = ['IMPORTANT', 'NORMAL', 'LOW']
+        const options = ['IMPORTANT', 'NORMAL', 'LOW'];
         return (<div>
                 <div style={{position: 'fixed', bottom: '8rem', right: '1rem'}}>
                     <Button size={'large'} type="primary"
@@ -68,9 +72,10 @@ class TodoForm extends React.Component {
                     title="What do you want to do?"
                     visible={this.state.visible}
                     onOk={this.handleSubmit}
+                    confirmLoading={this.state.spinning}
                     onCancel={this.handleCancel}>
                     <Input addonBefore="Todo" type="text" value={this.state.text} onChange={this.handleChange}
-                           placeholder="write something to do"/>
+                           placeholder="Something to do..."/>
                     <div style={{
                         marginTop: '1rem'
                     }}>
