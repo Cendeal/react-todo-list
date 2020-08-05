@@ -8,7 +8,7 @@ const mapDispatchToProps = (dispatch) => ({
     addTodo: async (todo) => {
         const data = await addTodo({
             text: todo,
-            time: new Date(),
+            created: new Date(),
             status: todoStatus.DOING
         })
         dispatch(addTodoAction(data))

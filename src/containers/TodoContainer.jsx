@@ -15,13 +15,15 @@ const mapDispatchToProps = (dispatch) => {
         },
         markDone: async (id) => {
             await updateTodoById(id, {
-                status: todoStatus.DONE
+                status: todoStatus.DONE,
+                updated:new Date()
             })
             dispatch(markDone(id))
         },
         markCancel: async (id) => {
             await updateTodoById(id, {
-                status: todoStatus.DOING
+                status: todoStatus.DOING,
+                updated:new Date()
             })
             dispatch(markCancel(id))
         }

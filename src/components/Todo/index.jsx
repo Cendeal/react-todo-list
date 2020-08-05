@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import todoStatus from "../../constants/todoStatus";
 import './index.css'
+import {prefixZero} from "../../utils/format";
 
 class Todo extends React.Component {
     handleDelete = (e) => {
@@ -26,7 +27,7 @@ class Todo extends React.Component {
     formatDate = (date) => {
         date = new Date(date)
         if (date instanceof Date) {
-            return `[${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}]`
+            return `${date.getFullYear()}-${prefixZero(date.getMonth() + 1, 2)}-${prefixZero(date.getDate(), 2)} ${prefixZero(date.getHours(), 2)}:${prefixZero(date.getMinutes(), 2)}`
         }
         return ''
     };
@@ -34,10 +35,13 @@ class Todo extends React.Component {
     render() {
         return <div className={this.addClassNames()} onClick={this.handleMark}>
             <div className={'text'} title={this.props.todo.text}>{this.props.todo.text}</div>
-            <div style={{
-                display: this.props.todo.time ? '' : 'none'
-            }} className={'time'}>
-                <span>{this.formatDate(this.props.todo.time)}</span>
+            <div className={'time'}>
+                <span style={{
+                    display: this.props.todo.created ? 'block' : 'none'
+                }}>[C]:{this.formatDate(this.props.todo.created)}</span>
+                <span style={{
+                    display: this.props.todo.updated ? 'block' : 'none'
+                }}>[U]:{this.formatDate(this.props.todo.updated)}</span>
             </div>
             <span className={'delete'} onClick={this.handleDelete}>X</span>
         </div>
