@@ -4,6 +4,7 @@
     overflow: hidden;
     flex-wrap: wrap;
     position: relative;
+    justify-content: center;
 }
 
 .time {

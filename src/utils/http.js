@@ -2,6 +2,7 @@ import Axios from "axios";
 import {store} from '../index'
 import {getTodoList} from "../api/todoApi";
 import {updateTodoList} from "../actions";
+import {message} from 'antd';
 
 const request = Axios.create({
     baseURL: 'https://5f2a43316ae5cc001642229d.mockapi.io/api/v1/',
@@ -15,8 +16,8 @@ const request = Axios.create({
 request.interceptors.response.use(function (response) {
     return response.data;
 }, async function (error) {
-    console.log(Object.keys(error), error.config)
     if (error.config.method.toUpperCase() !== 'GET') {
+        message.error(error.response ? error.response.data : 'unknown error')
         const data = await getTodoList()
         store.dispatch(updateTodoList(data))
     }

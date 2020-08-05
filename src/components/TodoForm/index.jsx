@@ -1,23 +1,31 @@
 import React from "react";
+import {Input, Button, Modal, Radio} from "antd";
+
+import {
+    PlusOutlined
+} from '@ant-design/icons';
 
 class TodoForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            text: ""
+            text: "",
+            visible: false
         }
 
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    handleSubmit() {
+    async handleSubmit() {
         if (this.state.text.length === 0) {
             return
         }
-        this.props.addTodo(this.state.text)
+        await this.props.addTodo({text: this.state.text, type: this.state.radio})
         this.setState({
-            text: ''
+            text: '',
+            visible: false,
+            radio: 'NORMAL'
         })
     }
 
@@ -27,12 +35,54 @@ class TodoForm extends React.Component {
         })
     }
 
+    handleCancel = () => {
+        this.setState({
+            visible: false
+        })
+    }
+
+    onChangeRadio = (e) => {
+        this.setState({
+            radio: e.target.value
+        })
+    }
+
+    handleShow = () => {
+        this.setState({
+            visible: true
+        })
+    }
+
     render() {
-        return (
-            <div>
-                <input type="text" value={this.state.text} onChange={this.handleChange}
-                       placeholder="write something to do"/>
-                <input type="submit" onClick={this.handleSubmit} value="submit"/>
+        const options = ['IMPORTANT', 'NORMAL', 'LOW']
+        return (<div>
+                <div style={{position: 'fixed', bottom: '8rem', right: '1rem'}}>
+                    <Button size={'large'} type="primary"
+                            shape="circle"
+                            onClick={this.handleShow}>
+                        <PlusOutlined/>
+                    </Button>
+                </div>
+                <Modal
+                    title="What do you want to do?"
+                    visible={this.state.visible}
+                    onOk={this.handleSubmit}
+                    onCancel={this.handleCancel}>
+                    <Input addonBefore="Todo" type="text" value={this.state.text} onChange={this.handleChange}
+                           placeholder="write something to do"/>
+                    <div style={{
+                        marginTop: '1rem'
+                    }}>
+                        <label style={{
+                            marginRight: '1rem'
+                        }}>Type:</label>
+                        <Radio.Group
+                            options={options}
+                            onChange={this.onChangeRadio}
+                            value={this.state.radio}
+                        />
+                    </div>
+                </Modal>
             </div>
         )
     }

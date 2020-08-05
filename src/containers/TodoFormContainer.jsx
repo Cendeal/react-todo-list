@@ -3,13 +3,17 @@ import {addTodo as addTodoAction} from "../actions";
 import {connect} from "react-redux"
 import {addTodo} from "../api/todoApi";
 import todoStatus from "../constants/todoStatus";
+import {notification} from "antd";
 
 const mapDispatchToProps = (dispatch) => ({
     addTodo: async (todo) => {
         const data = await addTodo({
-            text: todo,
+            ...todo,
             created: new Date(),
             status: todoStatus.DOING
+        })
+        notification.success({
+            message: `Todo-${data.id} has added successfully!`
         })
         dispatch(addTodoAction(data))
     }
