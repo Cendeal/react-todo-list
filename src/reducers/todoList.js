@@ -1,11 +1,6 @@
 import todoStatus from "../constants/todoStatus";
 import {ADD_TODO, DELETE_TODO, MARK_CANCEL, MARK_DONE} from "../constants/actionTypes";
-/*
-{
-    text:"example todo",
-    status:todoStatus.DOING
-}
- */
+
 let counter = 0;
 const todoList = (state = [], action) => {
     switch (action.type) {
@@ -30,7 +25,7 @@ const todoList = (state = [], action) => {
                     id: counter++,
                     text: action.text,
                     status: todoStatus.DOING,
-                    time: new Date()
+                    // time: new Date()
                 }];
         case DELETE_TODO:
             return [...state.filter(todo => todo.id !== action.id)];

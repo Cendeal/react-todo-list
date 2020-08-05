@@ -7,5 +7,9 @@
     margin: 1rem;
     text-decoration-line: none;
     color: white;
-
+    font-size: 1.5rem;
+    font-variant-caps: all-small-caps;
+}
+.menu a:hover{
+    color: lightblue;
 }
