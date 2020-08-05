@@ -31,8 +31,7 @@
 }
 
 .todo .text {
-    margin-bottom: 0.8rem;
     max-height: 8rem;
-    max-width: 9rem;
     overflow: hidden;
+    font-size: 1.5rem;
 }

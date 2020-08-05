@@ -9,11 +9,11 @@ class Todo extends React.Component {
         this.props.deleteTodo(this.props.todo.id)
     };
 
-    handleMark = () => {
+    handleMark = async () => {
         if (this.props.status === todoStatus.DOING) {
-            this.props.markDone(this.props.todo.id)
+            await this.props.markDone(this.props.todo.id)
         } else {
-            this.props.markCancel(this.props.todo.id)
+            await this.props.markCancel(this.props.todo.id)
         }
     };
     addClassNames = () => {
@@ -24,6 +24,7 @@ class Todo extends React.Component {
         return classNames.join(' ')
     };
     formatDate = (date) => {
+        date = new Date(date)
         if (date instanceof Date) {
             return `[${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}]`
         }
@@ -33,7 +34,9 @@ class Todo extends React.Component {
     render() {
         return <div className={this.addClassNames()} onClick={this.handleMark}>
             <div className={'text'} title={this.props.todo.text}>{this.props.todo.text}</div>
-            <div className={'time'}>
+            <div style={{
+                display: this.props.todo.time ? '' : 'none'
+            }} className={'time'}>
                 <span>{this.formatDate(this.props.todo.time)}</span>
             </div>
             <span className={'delete'} onClick={this.handleDelete}>X</span>

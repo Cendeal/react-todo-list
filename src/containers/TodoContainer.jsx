@@ -1,6 +1,7 @@
 import Todo from "../components/Todo";
 import {markCancel, markDone,deleteTodo as deleteTodoAction} from "../actions";
 import {deleteTodo, updateTodoById} from "../api/todoApi";
+import todoStatus from "../constants/todoStatus";
 
 
 const {connect} = require("react-redux");
@@ -14,13 +15,13 @@ const mapDispatchToProps = (dispatch) => {
         },
         markDone: async (id) => {
             await updateTodoById(id, {
-                status: true
+                status: todoStatus.DONE
             })
             dispatch(markDone(id))
         },
         markCancel: async (id) => {
             await updateTodoById(id, {
-                status: false
+                status: todoStatus.DOING
             })
             dispatch(markCancel(id))
         }

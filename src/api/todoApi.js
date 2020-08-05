@@ -1,15 +1,7 @@
 import {DELETE, GET, POST, PUT} from "../utils/http";
-import todoStatus from "../constants/todoStatus";
 
 export async function getTodoList() {
-    const data = await GET('/todos')
-    return data.map(({id, content, status}) => {
-        return {
-            id: id,
-            text: content,
-            status: status ? todoStatus.DONE : todoStatus.DOING
-        }
-    })
+    return await GET('/todos')
 }
 
 export function addTodo(data) {

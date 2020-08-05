@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import TodoListPage from "./components/TodoListPage";
-import {HashRouter as Router, Route, Switch} from "react-router-dom";
+import { Route, Switch} from "react-router-dom";
 import DoneTodoListContainer from "./containers/DoneTodoListContainer";
 import Menu from "./components/Menu";
 import {store} from "./index";
