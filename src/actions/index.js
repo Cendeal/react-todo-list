@@ -2,7 +2,8 @@ import {
     ADD_TODO,
     DELETE_TODO,
     MARK_CANCEL,
-    MARK_DONE
+    MARK_DONE,
+    UPDATE_TODO_LIST
 } from "../constants/actionTypes";
 
 export const addTodo = (text) => (
@@ -24,4 +25,10 @@ export const markDone = (id) => ({
 export const markCancel = (id) => ({
     type: MARK_CANCEL,
     id
+});
+
+
+export const updateTodoList = (data) => ({
+    type: UPDATE_TODO_LIST,
+    data
 });

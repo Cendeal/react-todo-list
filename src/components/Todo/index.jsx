@@ -36,7 +36,7 @@ class Todo extends React.Component {
             <div className={'time'}>
                 <span>{this.formatDate(this.props.todo.time)}</span>
             </div>
-            <span className={'delete'} onClick={this.handleDelete}>x</span>
+            <span className={'delete'} onClick={this.handleDelete}>X</span>
         </div>
     }
 }

@@ -3,7 +3,7 @@ import TodoList from "../components/TodoList";
 const {connect} = require("react-redux");
 
 
-const mapStateToProps=(state) =>{
+const mapStateToProps = (state) => {
     return {
         todoList: state.todoList
     }

@@ -30,7 +30,7 @@
     transition: all .3s ease 0ms;;
 }
 
-.text {
+.todo .text {
     margin-bottom: 0.8rem;
     max-height: 8rem;
     max-width: 9rem;

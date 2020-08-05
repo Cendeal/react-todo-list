@@ -1,9 +1,10 @@
 import todoStatus from "../constants/todoStatus";
-import {ADD_TODO, DELETE_TODO, MARK_CANCEL, MARK_DONE} from "../constants/actionTypes";
+import {ADD_TODO, DELETE_TODO, MARK_CANCEL, MARK_DONE, UPDATE_TODO_LIST} from "../constants/actionTypes";
 
 let counter = 0;
 const todoList = (state = [], action) => {
     switch (action.type) {
+
         case MARK_DONE: {
             let data = state.find(todo => todo.id === action.id);
             if (data) {
@@ -19,16 +20,22 @@ const todoList = (state = [], action) => {
             }
             return [...state]
         }
+
         case ADD_TODO:
             return [...state,
                 {
                     id: counter++,
                     text: action.text,
                     status: todoStatus.DOING,
-                    // time: new Date()
+                    time: new Date()
                 }];
+
         case DELETE_TODO:
             return [...state.filter(todo => todo.id !== action.id)];
+
+        case UPDATE_TODO_LIST:
+            return [...action.data]
+
         default:
             return state
     }
