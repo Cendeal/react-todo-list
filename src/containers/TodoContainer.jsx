@@ -1,5 +1,5 @@
 import Todo from "../components/Todo";
-import {markCancel, markDone, deleteTodo as deleteTodoAction} from "../actions";
+import {markCancel, markDone, deleteTodo as deleteTodoAction,changeType} from "../actions";
 import {deleteTodo, updateTodoById} from "../api/todoApi";
 import todoStatus from "../constants/todoStatus";
 import {notification} from "antd";
@@ -16,6 +16,15 @@ const mapDispatchToProps = (dispatch) => {
                 message: `Todo-${id} has deleted!`
             })
             dispatch(deleteTodoAction(id))
+        },
+        updateType: async (id,type) => {
+            const data = await updateTodoById(id, {
+               type
+            })
+            notification.success({
+                message: `Todo-${id} has set type as ${type}!`
+            })
+            dispatch(changeType(data))
         },
         markDone: async (id) => {
             await updateTodoById(id, {

@@ -53,8 +53,9 @@ class Todo extends React.Component {
         }
         return ''
     };
-    handleSelect = (value) => {
+    handleSelect = async (value) => {
         console.log(value)
+        await this.props.updateType(this.props.todo.id, value)
     }
 
     render() {
