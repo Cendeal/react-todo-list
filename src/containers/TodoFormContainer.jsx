@@ -4,6 +4,7 @@ import {connect} from "react-redux"
 import {addTodo} from "../api/todoApi";
 import todoStatus from "../constants/todoStatus";
 import {notification} from "antd";
+import handleError from "../utils/handleError";
 
 const mapDispatchToProps = (dispatch) => ({
     addTodo: async (todo) => {
@@ -11,12 +12,15 @@ const mapDispatchToProps = (dispatch) => ({
             ...todo,
             created: new Date(),
             status: todoStatus.DOING
-        })
+        }).catch(handleError);
+        if (data instanceof Error) {
+            return
+        }
         notification.success({
             message: `Todo-${data.id} has added successfully!`
-        })
+        });
         dispatch(addTodoAction(data))
     }
-})
-const TodoFormContainer = connect(null, mapDispatchToProps)(TodoForm)
+});
+const TodoFormContainer = connect(null, mapDispatchToProps)(TodoForm);
 export default TodoFormContainer

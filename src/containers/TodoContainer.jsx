@@ -1,8 +1,9 @@
 import Todo from "../components/Todo";
-import {markCancel, markDone, deleteTodo as deleteTodoAction,changeType} from "../actions";
+import {markCancel, markDone, deleteTodo as deleteTodoAction, changeType} from "../actions";
 import {deleteTodo, updateTodoById} from "../api/todoApi";
 import todoStatus from "../constants/todoStatus";
 import {notification} from "antd";
+import handleError from "../utils/handleError";
 
 
 const {connect} = require("react-redux");
@@ -11,16 +12,25 @@ const {connect} = require("react-redux");
 const mapDispatchToProps = (dispatch) => {
     return {
         deleteTodo: async (id) => {
-            await deleteTodo(id);
+            const data = await deleteTodo(id).catch(error => {
+                handleError(error)
+            }).catch(handleError);
+            if (data instanceof Error) {
+                return
+            }
             notification.success({
                 message: `Todo-${id} has deleted!`
             });
             dispatch(deleteTodoAction(id))
         },
-        updateType: async (id,type) => {
+        updateType: async (id, type) => {
             const data = await updateTodoById(id, {
-                type
-            });
+                type,
+                updated: new Date()
+            }).catch(handleError);
+            if (data instanceof Error) {
+                return
+            }
             notification.success({
                 message: `Todo-${id} has set type as ${type}!`
             });
@@ -30,7 +40,10 @@ const mapDispatchToProps = (dispatch) => {
             const data = await updateTodoById(id, {
                 status: todoStatus.DONE,
                 updated: new Date()
-            });
+            }).catch(handleError);
+            if (data instanceof Error) {
+                return
+            }
             notification.success({
                 message: `Todo-${id} has marked as done!`
             });
@@ -40,7 +53,10 @@ const mapDispatchToProps = (dispatch) => {
             const data = await updateTodoById(id, {
                 status: todoStatus.DOING,
                 updated: new Date()
-            });
+            }).catch(handleError);
+            if (data instanceof Error) {
+                return
+            }
             notification.success({
                 message: `Todo-${id} has marked as doing!`
             });

@@ -1,5 +1,5 @@
 import React from "react";
-import {Input, Button, Modal, Radio, Spin} from "antd";
+import {Input, Button, Modal, Radio} from "antd";
 
 import {
     PlusOutlined
