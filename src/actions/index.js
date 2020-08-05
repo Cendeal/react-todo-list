@@ -6,10 +6,10 @@ import {
     UPDATE_TODO_LIST
 } from "../constants/actionTypes";
 
-export const addTodo = (text) => (
+export const addTodo = (todo) => (
     {
         type: ADD_TODO,
-        text
+        todo
     }
 );
 export const deleteTodo = (id) => ({

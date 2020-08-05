@@ -1,4 +1,5 @@
 import {DELETE, GET, POST, PUT} from "../utils/http";
+import todoStatus from "../constants/todoStatus";
 
 export async function getTodoList() {
     const data = await GET('/todos')
@@ -6,7 +7,7 @@ export async function getTodoList() {
         return {
             id: id,
             text: content,
-            status: status
+            status: status ? todoStatus.DONE : todoStatus.DOING
         }
     })
 }
