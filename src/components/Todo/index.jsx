@@ -32,12 +32,10 @@ class Todo extends React.Component {
     handleMark = async () => {
         this.handleLoading(true);
         if (this.props.status === todoStatus.DOING) {
-            await this.props.markDone(this.props.todo.id)
-        } else {
-            await this.props.markCancel(this.props.todo.id)
+            return await this.props.markDone(this.props.todo.id)
+                .finally(() => this.handleLoading(false))
         }
-        this.handleLoading(false)
-
+        await this.props.markCancel(this.props.todo.id).finally(() => this.handleLoading(false))
     };
     addClassNames = () => {
         const classNames = ['todo'];
@@ -55,9 +53,8 @@ class Todo extends React.Component {
     };
     handleSelect = async (value) => {
         this.handleLoading(true);
-        await this.props.updateType(this.props.todo.id, value);
-        this.handleLoading(false);
-
+        await this.props.updateType(this.props.todo.id, value)
+            .finally(() => this.handleLoading(false));
     };
 
     render() {

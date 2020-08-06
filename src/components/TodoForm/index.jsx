@@ -26,11 +26,11 @@ class TodoForm extends React.Component {
         this.setState({
             spinning: true
         });
-        await this.props.addTodo({text: this.state.text, type: this.state.radio});
+        await this.props.addTodo({text: this.state.text, type: this.state.radio})
+            .finally(()=>this.setState({spinning: false}));
         this.setState({
             text: '',
-            visible: false,
-            spinning: false
+            visible: false
         })
     }
 
