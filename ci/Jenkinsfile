@@ -1,0 +1,13 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('build') {
+            steps {
+                git 'https://github.com/Cendeal/react-todo-list.git'
+                bat "npm install"
+                bat "npm run build"
+            }
+        }
+    }
+}

@@ -19,8 +19,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         updateType: async (id, type) => {
             const data = await updateTodoById(id, {
-                type,
-                updated: new Date()
+                type
             })
             notification.success({
                 message: `Todo-${id} has set type as ${type}!`
@@ -29,8 +28,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         markDone: async (id) => {
             const data = await updateTodoById(id, {
-                status: todoStatus.DONE,
-                updated: new Date()
+                status: todoStatus.DONE
             })
             notification.success({
                 message: `Todo-${id} has marked as done!`
@@ -39,8 +37,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         markCancel: async (id) => {
             const data = await updateTodoById(id, {
-                status: todoStatus.DOING,
-                updated: new Date()
+                status: todoStatus.DOING
             })
             notification.success({
                 message: `Todo-${id} has marked as doing!`

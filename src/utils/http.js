@@ -2,7 +2,7 @@ import Axios from "axios";
 import handleError from "./handleError";
 
 const request = Axios.create({
-    baseURL: 'https://5f2a43316ae5cc001642229d.mockapi.io/api/v1/',
+    baseURL: 'http://localhost:8081/',
     timeout: 3000,
     validateStatus: function (status) {
         return status >= 200 && status < 300; // default
